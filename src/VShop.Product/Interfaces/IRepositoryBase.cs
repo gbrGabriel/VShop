@@ -8,6 +8,6 @@ public interface IRepositoryBase<TEntity> : IDisposable
     Task<int> DeleteAsync(TEntity entity);
     void Add(TEntity entity);
     void AddRange(IEnumerable<TEntity> entity);
-    Task<TEntity?> GetByIdAsync(Guid id);
+    Task<TEntity?> GetByIdAsync(int id);
     Task<IEnumerable<TEntity>> GetAllAsync();
 }
