@@ -1,6 +1,5 @@
 using System.Reflection;
-using Context;
-using Microsoft.EntityFrameworkCore;
+using IoC;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,10 +8,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    e => e.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
-    ServiceLifetime.Scoped
-);
+builder.Services.AddDbContext(builder.Configuration);
+
+builder.Services.Register();
 
 builder.Services.AddSwaggerGen(opt =>
 {
