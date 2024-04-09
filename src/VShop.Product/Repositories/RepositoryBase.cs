@@ -102,7 +102,7 @@ public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IR
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync() =>
      await _context.Set<TEntity>().ToListAsync();
 
-    public virtual async Task<TEntity?> GetByIdAsync(Guid id) =>
+    public virtual async Task<TEntity?> GetByIdAsync(int id) =>
          await _context.Set<TEntity>().FindAsync(id);
 
     public void Dispose()
