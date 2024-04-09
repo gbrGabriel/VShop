@@ -6,6 +6,8 @@ C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\VShop.Product.dll
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\VShop.Product.pdb
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\VShop.Product.xml
+C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\Humanizer.dll
