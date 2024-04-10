@@ -3,4 +3,6 @@ using Entities;
 
 namespace Interfaces;
 
-public interface IServiceProduct : IServiceBase<Product, ProductDTO> { }
+public interface IServiceProduct : IServiceBase<Product, ProductDTO>
+{
+}

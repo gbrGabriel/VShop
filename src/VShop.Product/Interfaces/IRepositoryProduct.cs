@@ -2,4 +2,6 @@ using Entities;
 
 namespace Interfaces;
 
-public interface IRepositoryProduct : IRepositoryBase<Product> { }
+public interface IRepositoryProduct : IRepositoryBase<Product>
+{
+}
