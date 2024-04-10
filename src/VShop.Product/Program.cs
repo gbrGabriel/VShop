@@ -12,23 +12,32 @@ builder.Services.AddDbContext(builder.Configuration);
 
 builder.Services.Register();
 
-builder.Services.AddSwaggerGen(opt =>
+builder.Services.AddSwaggerGen(c =>
 {
-    opt.SwaggerDoc(
+    c.SwaggerDoc(
         "v1",
         new OpenApiInfo
         {
             Title = "Microsserviço de Produto",
             Description = "Microsserviço para Produto",
             Version = "v1",
-            Contact = new OpenApiContact { Name = "Gabriel Silva", }
+            Contact = new OpenApiContact
+            {
+                Email = "gabrielgbr.contato@gmail.com",
+                Name = "Gabriel Silva",
+                Url = new Uri("https://www.linkedin.com/in/gbrgabriel/")
+            },
+            License = new OpenApiLicense
+            {
+                Name = "MIT",
+                Url = new Uri("https://www.mit.edu/~amini/LICENSE.md")
+            }
         }
     );
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
-    opt.IncludeXmlComments(xmlPath);
+    c.IncludeXmlComments(xmlPath);
 });
 
 var app = builder.Build();
@@ -36,7 +45,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.DefaultModelsExpandDepth(-1);
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product V1");
+    });
 }
 
 app.UseHttpsRedirection();
