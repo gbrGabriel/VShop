@@ -17,6 +17,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        if(!optionsBuilder.IsConfigured)
+            optionsBuilder.UseSqlServer("DefaultConnection");
+            
         base.OnConfiguring(optionsBuilder);
     }
     public override void Dispose()
