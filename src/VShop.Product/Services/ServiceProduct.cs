@@ -5,6 +5,7 @@ using Interfaces;
 
 namespace Services;
 
-public class ServiceProduct(IRepositoryBase<Product> repository, IMapper mapper) : ServiceBase<Product, ProductDTO>(repository, mapper), IServiceProduct
+public class ServiceProduct(IRepositoryProduct repository, IMapper mapper) : ServiceBase<Product, ProductDTO>(repository, mapper), IServiceProduct
 {
+
 }

@@ -3,16 +3,27 @@ using Interfaces;
 
 namespace Services
 {
-    public abstract class ServiceBase<TEntity, TDto>(IRepositoryBase<TEntity> repository, IMapper mapper) : IServiceBase<TEntity, TDto>
+    public abstract class ServiceBase<TEntity, TDto> : IServiceBase<TEntity, TDto>
         where TEntity : class
         where TDto : class
     {
-        protected readonly IRepositoryBase<TEntity> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        protected readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-       
+        private readonly IRepositoryBase<TEntity> _repository;
+        private readonly IMapper _mapper;
+
+        public ServiceBase(IRepositoryBase<TEntity> repository, IMapper mapper)
+        {
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
         public virtual TEntity MapDtoToEntity(TDto dto) => _mapper.Map<TEntity>(dto);
-        public virtual IEnumerable<TEntity> MapListDtoToEntity(IEnumerable<TDto> dtos) => _mapper.Map<IEnumerable<TEntity>>(dtos);
-        public virtual IEnumerable<TDto> MapListEntityToDto(IEnumerable<TEntity> entities) => _mapper.Map<IEnumerable<TDto>>(entities);
+
+        public virtual IEnumerable<TEntity> MapListDtoToEntity(IEnumerable<TDto> dtos) =>
+            _mapper.Map<IEnumerable<TEntity>>(dtos);
+
+        public virtual IEnumerable<TDto> MapListEntityToDto(IEnumerable<TEntity> entities) =>
+            _mapper.Map<IEnumerable<TDto>>(entities);
+
         public virtual TDto MapEntityToDto(TEntity entity) => _mapper.Map<TDto>(entity);
 
         public virtual void Add(TDto dto)
