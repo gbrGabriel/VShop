@@ -4,6 +4,28 @@
         <name>VShop.Product</name>
     </assembly>
     <members>
+        <member name="M:Controllers.CategoryController.GetAllCategories">
+            <summary>
+            Obtém todos as categorias cadastrados no sistema.
+            </summary>
+            <returns>Uma coleção de categorias.</returns>
+            <response code="200">Retorna uma coleção de categorias</response>
+        </member>
+        <member name="M:Controllers.CategoryController.GetAllProductCategories">
+            <summary>
+            Obtém todos os produtos de todas categorias cadastrada no sistema.
+            </summary>
+            <returns>Uma coleção de categorias.</returns>
+            <response code="200">Retorna uma coleção de categorias</response>
+        </member>
+        <member name="M:Controllers.CategoryController.GetCategoryById(System.Int32)">
+            <summary>
+            Obtém uma categorias cadastrada no sistema por id.
+            </summary>
+            <param name="id">Id da categoria cadastrada no sistema.</param>
+            <returns>Uma categoria cadastrado.</returns>
+            <response code="200">Retorna a categoria encontrado.</response>
+        </member>
         <member name="T:VShop.Product.Persistence.Migrations.FirstMigration">
             <inheritdoc />
         </member>
