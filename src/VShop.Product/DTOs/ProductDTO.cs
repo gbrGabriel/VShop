@@ -5,6 +5,8 @@ namespace DTOs;
 
 public class ProductDTO
 {
+    public int Id { get; set; }
+
     [Required(ErrorMessage = "The {0} is required")]
     [StringLength(
         maximumLength: 255,
