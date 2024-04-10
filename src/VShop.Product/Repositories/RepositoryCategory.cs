@@ -11,5 +11,5 @@ public class RepositoryCategory(ApplicationDbContext context) : RepositoryBase<C
     => await _context.Categories.FirstOrDefaultAsync( c => c.Name == name );
 
     public async Task<IEnumerable<Category>> GetCategoriesProducts()
-    => await _context.Categories.Include(e => e.Products).ToListAsync();        
+    => await _context.Categories.Include(e => e.Products).ToListAsync();      
 }

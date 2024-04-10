@@ -3,9 +3,11 @@ using Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repositories;
-public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IRepositoryBase<TEntity> where TEntity : class
+
+public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IRepositoryBase<TEntity>
+    where TEntity : class
 {
-    public readonly ApplicationDbContext _context = context;
+    protected readonly ApplicationDbContext _context = context;
 
     public async Task<int> DeleteAsync(TEntity entity)
     {
@@ -100,10 +102,10 @@ public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IR
     }
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync() =>
-     await _context.Set<TEntity>().ToListAsync();
+        await _context.Set<TEntity>().ToListAsync();
 
     public virtual async Task<TEntity?> GetByIdAsync(int id) =>
-         await _context.Set<TEntity>().FindAsync(id);
+        await _context.Set<TEntity>().FindAsync(id);
 
     public void Dispose()
     {
