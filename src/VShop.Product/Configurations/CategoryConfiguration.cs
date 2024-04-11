@@ -1,8 +1,8 @@
-using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VShopProduct.Entities;
 
-namespace Configurations;
+namespace VShopProduct.Configurations;
 
 public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {

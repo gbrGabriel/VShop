@@ -1,8 +1,8 @@
-using System.Reflection;
-using Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using VShopProduct.Entities;
 
-namespace Context;
+namespace VShopProduct.Context;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
@@ -17,9 +17,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if(!optionsBuilder.IsConfigured)
+        if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseSqlServer("DefaultConnection");
-            
+
         base.OnConfiguring(optionsBuilder);
     }
     public override void Dispose()
