@@ -8,7 +8,7 @@ public class CategoryDTO
     /// Id of category
     /// </summary>
     /// <example>1</example>
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     /// <summary>
     /// Name for new category

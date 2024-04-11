@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace VShopProduct.DTOs;
 
@@ -61,6 +62,9 @@ public class ProductDTO
         ErrorMessage = "The field must be between {1} and {0}"
     )]
     public string ImageUrl { get; set; } = null!;
+
+    [JsonIgnore]
+    public string? CategoryName { get; set; }
 
     /// <summary>
     /// Id of category product
