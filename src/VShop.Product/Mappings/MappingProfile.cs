@@ -1,8 +1,8 @@
 using AutoMapper;
-using DTOs;
-using Entities;
+using VShopProduct.DTOs;
+using VShopProduct.Entities;
 
-namespace Mappings;
+namespace VShopProduct.Mappings;
 
 public class MappingProfile : Profile
 {
