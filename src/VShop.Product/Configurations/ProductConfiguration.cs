@@ -14,7 +14,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
 
-        builder.Property(x => x.Descripton).HasMaxLength(255).IsRequired();
+        builder.Property(x => x.Description).HasMaxLength(255).IsRequired();
 
         builder.Property(x => x.ImageUrl).HasMaxLength(255).IsRequired();
     }
