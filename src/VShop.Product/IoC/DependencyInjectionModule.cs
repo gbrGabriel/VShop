@@ -1,8 +1,8 @@
-using Context;
-using Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Repositories;
-using Services;
+using VShopProduct.Context;
+using VShopProduct.Interfaces;
+using VShopProduct.Repositories;
+using VShopProduct.Services;
 
 namespace IoC;
 
