@@ -59,6 +59,7 @@ public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IR
         {
             try
             {
+                _context.ChangeTracker.Clear();
                 _context.Set<TEntity>().Update(entity);
 
                 result = await _context.SaveChangesAsync();
