@@ -27,6 +27,35 @@
             <response code="200">Retorna a categoria encontrado.</response>
             <response code="404">Mensagem de não encontrado.</response>
         </member>
+        <member name="M:VShopProduct.Controllers.CategoryController.RecordCategory(VShopProduct.Models.CategoryInputModel)">
+             <summary>
+             Grava uma nova categoria no sistema.
+             </summary>
+             <param name="model">Dados da categoria a ser gravado.</param>
+             <returns>A nova categoria cadastrado.</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST 
+                 {
+                    "name": "Categoria teste"
+                 }
+            
+             </remarks>
+             <response code="200">Retorna a nova categoria cadastrado.</response>
+             <response code="400">Retorna uma mensagem de erro.</response>
+        </member>
+        <member name="M:VShopProduct.Controllers.CategoryController.UpdateCategory(System.Int32,System.String)">
+            <summary>
+            Atualiza uma categoria por id.
+            </summary>
+            <param name="id">Id da categoria cadastrada no sistema.</param>
+            <param name="name">Novo nome para categoria cadastrada no sistema.</param>
+            <returns>Categoria atualizada no sistema</returns>
+            <response code="200">Retorna a categoria atualizada.</response>
+            <response code="400">Mensagem de erro nos parametros.</response>
+            <response code="404">Mensagem de não encontrado.</response>
+        </member>
         <member name="M:VShopProduct.Controllers.CategoryController.DeleteCategory(System.Int32)">
             <summary>
             Deleta uma categoria por id.
@@ -47,13 +76,70 @@
             <returns>Uma coleção de produtos.</returns>
             <response code="200">Retorna uma coleção de produtos</response>
         </member>
-        <member name="M:VShopProduct.Controllers.ProductController.GetCategoryById(System.Int32)">
+        <member name="M:VShopProduct.Controllers.ProductController.GetProductById(System.Int32)">
             <summary>
             Obtém um produto cadastrado no sistema por id.
             </summary>
             <param name="id">Id do produto cadastrada no sistema.</param>
             <returns>Um produto cadastrado.</returns>
             <response code="200">Retorna o produto encontrado.</response>
+            <response code="404">Mensagem de não encontrado.</response>
+        </member>
+        <member name="M:VShopProduct.Controllers.ProductController.RecordProduct(VShopProduct.Models.ProductInputModel)">
+             <summary>
+             Grava um novo produto no sistema.
+             </summary>
+             <param name="model">Dados do produto a ser gravado.</param>
+             <returns>Um novo produto cadastrado.</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST 
+                 {
+                    "Name": "Categoria teste",
+                    "Price": 1.50,
+                    "Description": "Descrição teste",
+                    "Stock": 10,
+                    "ImagemUrl": "produto.png",
+                    "CategoryId": 1,
+                 }
+            
+             </remarks>
+             <response code="200">Retorna o novo produto cadastrado.</response>
+             <response code="400">Retorna uma mensagem de erro.</response>
+        </member>
+        <member name="M:VShopProduct.Controllers.ProductController.UpdateProduct(System.Int32,VShopProduct.Models.ProductInputModel)">
+             <summary>
+             Atualiza um produto existente por id.
+             </summary>
+             <param name="id">Id do produto cadastrada no sistema.</param>
+             <param name="model">Dados para atualizar o produto cadastrado no sistema.</param>
+             <returns>Produto atualizado no sistema</returns>
+             <remarks>
+             Exemplo de requisição:
+            
+                 POST 
+                 {
+                    "Name": "Categoria teste",
+                    "Price": 1.50,
+                    "Description": "Descrição teste",
+                    "Stock": 10,
+                    "ImagemUrl": "produto.png",
+                    "CategoryId": 1,
+                 }
+            
+             </remarks>
+             <response code="200">Retorna o produto atualizada.</response>
+             <response code="400">Mensagem de erro nos parametros.</response>
+             <response code="404">Mensagem de não encontrado.</response>
+        </member>
+        <member name="M:VShopProduct.Controllers.ProductController.DeleteProduct(System.Int32)">
+            <summary>
+            Deleta um produto por id.
+            </summary>
+            <param name="id">Id do produto cadastrado no sistema.</param>
+            <returns>StatusCode 204</returns>
+            <response code="204">Retorna StatusCode 204.</response>
             <response code="404">Mensagem de não encontrado.</response>
         </member>
         <member name="P:VShopProduct.DTOs.CategoryDTO.Id">
@@ -105,6 +191,48 @@
             <example>produto.png</example>
         </member>
         <member name="P:VShopProduct.DTOs.ProductDTO.CategoryId">
+            <summary>
+            Id of category product
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:VShopProduct.Models.CategoryInputModel.Name">
+            <summary>
+            Name for new category
+            </summary>
+            <example>Nome da categoria</example>
+        </member>
+        <member name="P:VShopProduct.Models.ProductInputModel.Name">
+            <summary>
+            Name for new product
+            </summary>
+            <example>Nome do produto</example>
+        </member>
+        <member name="P:VShopProduct.Models.ProductInputModel.Price">
+            <summary>
+            Price of product
+            </summary>
+            <example>1.50</example>
+        </member>
+        <member name="P:VShopProduct.Models.ProductInputModel.Description">
+            <summary>
+            Description of product
+            </summary>
+            <example>Descrição do produto</example>
+        </member>
+        <member name="P:VShopProduct.Models.ProductInputModel.Stock">
+            <summary>
+            Stock of product
+            </summary>
+            <example>10</example>
+        </member>
+        <member name="P:VShopProduct.Models.ProductInputModel.ImageUrl">
+            <summary>
+            URL image of product
+            </summary>
+            <example>produto.png</example>
+        </member>
+        <member name="P:VShopProduct.Models.ProductInputModel.CategoryId">
             <summary>
             Id of category product
             </summary>
