@@ -1,9 +1,9 @@
 using AutoMapper;
-using DTOs;
-using Entities;
-using Interfaces;
+using VShopProduct.DTOs;
+using VShopProduct.Entities;
+using VShopProduct.Interfaces;
 
-namespace Services;
+namespace VShopProduct.Services;
 
 public class ServiceProduct(IRepositoryProduct repository, IMapper mapper) : ServiceBase<Product, ProductDTO>(repository, mapper), IServiceProduct
 {

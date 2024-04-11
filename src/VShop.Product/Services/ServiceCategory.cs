@@ -1,12 +1,12 @@
 using AutoMapper;
-using DTOs;
-using Entities;
-using Interfaces;
+using VShopProduct.DTOs;
+using VShopProduct.Entities;
+using VShopProduct.Interfaces;
 
-namespace Services;
+namespace VShopProduct.Services;
 
 public class ServiceCategory(IRepositoryCategory repository, IMapper mapper) : ServiceBase<Category, CategoryDTO>(repository, mapper), IServiceCategory
 {
-    public async Task<IEnumerable<Category>> GetCategoriesProducts()
-        => await repository.GetCategoriesProducts();
+    public async Task<IEnumerable<CategoryDTO>> GetCategoriesProducts()
+        => MapListEntityToDto(await repository.GetCategoriesProducts());
 }

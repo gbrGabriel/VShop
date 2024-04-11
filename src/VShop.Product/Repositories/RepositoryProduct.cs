@@ -1,8 +1,8 @@
-using Context;
-using Entities;
-using Interfaces;
+using VShopProduct.Context;
+using VShopProduct.Entities;
+using VShopProduct.Interfaces;
 
-namespace Repositories;
+namespace VShopProduct.Repositories;
 
 public class RepositoryProduct(ApplicationDbContext context) : RepositoryBase<Product>(context), IRepositoryProduct
 {

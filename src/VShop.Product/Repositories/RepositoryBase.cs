@@ -1,8 +1,8 @@
-using Context;
-using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using VShopProduct.Context;
+using VShopProduct.Interfaces;
 
-namespace Repositories;
+namespace VShopProduct.Repositories;
 
 public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IRepositoryBase<TEntity>
     where TEntity : class
@@ -17,6 +17,7 @@ public abstract class RepositoryBase<TEntity>(ApplicationDbContext context) : IR
         {
             try
             {
+                _context.ChangeTracker.Clear();
                 _context.Set<TEntity>().Remove(entity);
 
                 result = await _context.SaveChangesAsync();
