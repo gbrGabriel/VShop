@@ -1,4 +1,4 @@
-namespace Entities;
+namespace VShopProduct.Entities;
 
 public class Category
 {

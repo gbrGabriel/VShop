@@ -1,4 +1,4 @@
-namespace Interfaces;
+namespace VShopProduct.Interfaces;
 
 public interface IRepositoryBase<TEntity> : IDisposable
     where TEntity : class

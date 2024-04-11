@@ -1,6 +1,6 @@
-using Entities;
+using VShopProduct.Entities;
 
-namespace Interfaces;
+namespace VShopProduct.Interfaces;
 
 public interface IRepositoryCategory : IRepositoryBase<Category>
 {

@@ -1,9 +1,9 @@
-using DTOs;
-using Entities;
+using VShopProduct.DTOs;
+using VShopProduct.Entities;
 
-namespace Interfaces;
+namespace VShopProduct.Interfaces;
 
 public interface IServiceCategory : IServiceBase<Category, CategoryDTO>
 {
-    Task<IEnumerable<Category>> GetCategoriesProducts();
+    Task<IEnumerable<CategoryDTO>> GetCategoriesProducts();
 }
