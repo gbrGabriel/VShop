@@ -4,38 +4,122 @@
         <name>VShop.Product</name>
     </assembly>
     <members>
-        <member name="M:Controllers.CategoryController.GetAllCategories">
+        <member name="M:VShopProduct.Controllers.CategoryController.GetAllCategories">
             <summary>
             Obtém todos as categorias cadastrados no sistema.
             </summary>
             <returns>Uma coleção de categorias.</returns>
             <response code="200">Retorna uma coleção de categorias</response>
         </member>
-        <member name="M:Controllers.CategoryController.GetAllProductCategories">
+        <member name="M:VShopProduct.Controllers.CategoryController.GetAllProductCategories">
             <summary>
             Obtém todos os produtos de todas categorias cadastrada no sistema.
             </summary>
             <returns>Uma coleção de categorias.</returns>
             <response code="200">Retorna uma coleção de categorias</response>
         </member>
-        <member name="M:Controllers.CategoryController.GetCategoryById(System.Int32)">
+        <member name="M:VShopProduct.Controllers.CategoryController.GetCategoryById(System.Int32)">
             <summary>
             Obtém uma categorias cadastrada no sistema por id.
             </summary>
             <param name="id">Id da categoria cadastrada no sistema.</param>
             <returns>Uma categoria cadastrado.</returns>
             <response code="200">Retorna a categoria encontrado.</response>
+            <response code="404">Mensagem de não encontrado.</response>
         </member>
-        <member name="T:VShop.Product.Persistence.Migrations.FirstMigration">
+        <member name="M:VShopProduct.Controllers.CategoryController.DeleteCategory(System.Int32)">
+            <summary>
+            Deleta uma categoria por id.
+            </summary>
+            <param name="id">Id da categoria cadastrada no sistema.</param>
+            <returns>StatusCode 204</returns>
+             <remarks>
+            Atenção!
+            Caso delete uma categoria, a exclusão será em cascade para as demais entidades que dependem de categoria.
+            </remarks>
+            <response code="204">Retorna StatusCode 204.</response>
+            <response code="404">Mensagem de não encontrado.</response>
+        </member>
+        <member name="M:VShopProduct.Controllers.ProductController.GetAll">
+            <summary>
+            Obtém todos os produtos cadastrados no sistema.
+            </summary>
+            <returns>Uma coleção de produtos.</returns>
+            <response code="200">Retorna uma coleção de produtos</response>
+        </member>
+        <member name="M:VShopProduct.Controllers.ProductController.GetCategoryById(System.Int32)">
+            <summary>
+            Obtém um produto cadastrado no sistema por id.
+            </summary>
+            <param name="id">Id do produto cadastrada no sistema.</param>
+            <returns>Um produto cadastrado.</returns>
+            <response code="200">Retorna o produto encontrado.</response>
+            <response code="404">Mensagem de não encontrado.</response>
+        </member>
+        <member name="P:VShopProduct.DTOs.CategoryDTO.Id">
+            <summary>
+            Id of category
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.CategoryDTO.Name">
+            <summary>
+            Name for new category
+            </summary>
+            <example>Nome da categoria</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.Id">
+            <summary>
+            Id of product
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.Name">
+            <summary>
+            Name for new product
+            </summary>
+            <example>Nome do produto</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.Price">
+            <summary>
+            Price of product
+            </summary>
+            <example>1.50</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.Description">
+            <summary>
+            Description of product
+            </summary>
+            <example>Descrição do produto</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.Stock">
+            <summary>
+            Stock of product
+            </summary>
+            <example>10</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.ImageUrl">
+            <summary>
+            URL image of product
+            </summary>
+            <example>produto.png</example>
+        </member>
+        <member name="P:VShopProduct.DTOs.ProductDTO.CategoryId">
+            <summary>
+            Id of category product
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="T:VShop.Product.Persistence.Migrations.InitialMigration">
             <inheritdoc />
         </member>
-        <member name="M:VShop.Product.Persistence.Migrations.FirstMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:VShop.Product.Persistence.Migrations.InitialMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:VShop.Product.Persistence.Migrations.FirstMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:VShop.Product.Persistence.Migrations.InitialMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:VShop.Product.Persistence.Migrations.FirstMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:VShop.Product.Persistence.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>
