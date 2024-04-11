@@ -18,9 +18,9 @@ builder.Services.AddSwaggerGen(c =>
         "v1",
         new OpenApiInfo
         {
-            Title = "Microsserviço de Produto",
-            Description = "Microsserviço para Produto",
-            Version = "v1",
+            Title = "Microserviço de Produtos",
+            Description = "Microserviço para cadastro de produtos",
+            Version = "2024.04.1.0",
             Contact = new OpenApiContact
             {
                 Email = "gabrielgbr.contato@gmail.com",
