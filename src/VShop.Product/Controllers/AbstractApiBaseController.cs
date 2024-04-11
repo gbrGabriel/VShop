@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Controllers;
+namespace VShopProduct.Controllers;
 
 [ApiController]
 public abstract class AbstractApiBaseController : ControllerBase { }
