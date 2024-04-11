@@ -3,18 +3,12 @@ using VShopProduct.Interfaces;
 
 namespace VShopProduct.Services;
 
-public abstract class ServiceBase<TEntity, TDto> : IServiceBase<TEntity, TDto>
+public abstract class ServiceBase<TEntity, TDto>(IRepositoryBase<TEntity> repository, IMapper mapper) : IServiceBase<TEntity, TDto>
     where TEntity : class
     where TDto : class
 {
-    private readonly IRepositoryBase<TEntity> _repository;
-    private readonly IMapper _mapper;
-
-    public ServiceBase(IRepositoryBase<TEntity> repository, IMapper mapper)
-    {
-        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-    }
+    private readonly IRepositoryBase<TEntity> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+    private readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
     public virtual TEntity MapDtoToEntity(TDto dto) => _mapper.Map<TEntity>(dto);
 
@@ -55,6 +49,40 @@ public abstract class ServiceBase<TEntity, TDto> : IServiceBase<TEntity, TDto>
         try
         {
             return await _repository.SaveChangesAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<TDto> AddSaveAsync(TDto dto)
+    {
+        try
+        {
+            var entity = MapDtoToEntity(dto);
+
+            _repository.Add(entity);
+
+            await _repository.SaveChangesAsync();
+
+            return MapEntityToDto(entity);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<TDto> AddUpdateAsync(TDto dto)
+    {
+        try
+        {
+            var entity = MapDtoToEntity(dto);
+
+            await _repository.UpdateAsync(entity);
+
+            return MapEntityToDto(entity);
         }
         catch (Exception)
         {
@@ -113,7 +141,5 @@ public abstract class ServiceBase<TEntity, TDto> : IServiceBase<TEntity, TDto>
     }
 
     public virtual void Dispose()
-    {
-        _repository.Dispose();
-    }
+        => _repository.Dispose();
 }
