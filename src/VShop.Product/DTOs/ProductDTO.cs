@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace VShopProduct.DTOs;
 
@@ -63,7 +62,6 @@ public class ProductDTO
     )]
     public string ImageUrl { get; set; } = null!;
 
-    [JsonIgnore]
     public string? CategoryName { get; set; }
 
     /// <summary>
