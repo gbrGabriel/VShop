@@ -1,13 +1,10 @@
 ﻿namespace VShopWeb.Interfaces;
-public interface IServiceBase<TEntity, TDto>
-       where TEntity : class
-       where TDto : class
+public interface IServiceBase<TModel>
+       where TModel : class
 {
-    Task<TDto?> GetByIdAsync(string requestUri, int id);
-    Task<IEnumerable<TDto>?> GetAllAsync(string requestUri);
-    Task<TDto?> PostAsync(string requestUri, TDto dto);
-    Task<TDto?> PutAsync(string requestUri, TDto dto);
+    Task<TModel?> GetByIdAsync(string requestUri, int id);
+    Task<IEnumerable<TModel>?> GetAllAsync(string requestUri);
+    Task<TModel?> PostAsync(string requestUri, TModel model);
+    Task<TModel?> PutAsync(string requestUri, TModel model);
     Task DeleteAsync(string requestUri);
-    TDto MapToDto<TDto>(TEntity entity);
-    TEntity MapToEntity<TDto, TEntity>(TDto dto);
 }

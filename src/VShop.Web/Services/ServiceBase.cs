@@ -1,24 +1,25 @@
 ﻿using AutoMapper;
+using System.Text.Json;
 using VShopWeb.Interfaces;
 
 namespace VShopWeb.Services;
 
-public abstract class ServiceBase<TEntity, TDto>(IHttpClientFactory httpClientFactory, IMapper mapper) : IServiceBase<TEntity, TDto>
-       where TEntity : class
-       where TDto : class
+public abstract class ServiceBase<TModel>(IHttpClientFactory httpClientFactory, IMapper mapper) : IServiceBase<TModel>
+       where TModel : class
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(IHttpClientFactory));
     private readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+    private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
 
-    public async Task<TDto?> GetByIdAsync(string requestUri, int id)
+    public async Task<TModel?> GetByIdAsync(string requestUri, int id)
     {
         try
         {
-            var response = await _httpClientFactory.CreateClient().GetAsync($"{requestUri}/{id}");
+            using var response = await _httpClientFactory.CreateClient("MicroserviceProduct").GetAsync($"{requestUri}/{id}");
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<TDto>();
+                return await JsonSerializer.DeserializeAsync<TModel>(await response.Content.ReadAsStreamAsync(), _options);
             }
             return null;
         }
@@ -28,15 +29,34 @@ public abstract class ServiceBase<TEntity, TDto>(IHttpClientFactory httpClientFa
         }
     }
 
-    public async Task<IEnumerable<TDto>?> GetAllAsync(string requestUri)
+    public async Task<IEnumerable<TModel>?> GetAllAsync(string requestUri)
     {
         try
         {
-            var response = await _httpClientFactory.CreateClient().GetAsync(requestUri);
+            using var response = await _httpClientFactory.CreateClient("MicroserviceProduct").GetAsync(requestUri);
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<IEnumerable<TDto>>();
+                return await JsonSerializer.DeserializeAsync<IEnumerable<TModel>>(await response.Content.ReadAsStreamAsync(), _options);
+            }
+
+            return Enumerable.Empty<TModel>(); ;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<TModel?> PostAsync(string requestUri, TModel model)
+    {
+        try
+        {
+            using var response = await _httpClientFactory.CreateClient("MicroserviceProduct").PostAsJsonAsync(requestUri, model);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<TModel>(await response.Content.ReadAsStreamAsync(), _options);
             }
 
             return null;
@@ -47,34 +67,15 @@ public abstract class ServiceBase<TEntity, TDto>(IHttpClientFactory httpClientFa
         }
     }
 
-    public async Task<TDto?> PostAsync(string requestUri, TDto dto)
+    public async Task<TModel?> PutAsync(string requestUri, TModel model)
     {
         try
         {
-            var response = await _httpClientFactory.CreateClient().PostAsJsonAsync(requestUri, dto);
+            using var response = await _httpClientFactory.CreateClient().PutAsJsonAsync(requestUri, model);
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<TDto>();
-            }
-
-            return null;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
-
-    public async Task<TDto?> PutAsync(string requestUri, TDto dto)
-    {
-        try
-        {
-            var response = await _httpClientFactory.CreateClient().PutAsJsonAsync(requestUri, dto);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<TDto>();
+                return await JsonSerializer.DeserializeAsync<TModel>(await response.Content.ReadAsStreamAsync(), _options);
             }
             return null;
         }
@@ -88,21 +89,11 @@ public abstract class ServiceBase<TEntity, TDto>(IHttpClientFactory httpClientFa
     {
         try
         {
-            await _httpClientFactory.CreateClient().DeleteAsync(requestUri);
+            await _httpClientFactory.CreateClient("MicroserviceProduct").DeleteAsync(requestUri);
         }
         catch (Exception)
         {
             throw;
         }
     }
-
-#pragma warning disable CS0693 // Type parameter has the same name as the type parameter from outer type
-    public TDto MapToDto<TDto>(TEntity dto)
-#pragma warning restore CS0693 // Type parameter has the same name as the type parameter from outer type
-        => _mapper.Map<TDto>(dto);
-
-#pragma warning disable CS0693 // Type parameter has the same name as the type parameter from outer type
-    public TEntity MapToEntity<TDto, TEntity>(TDto dto)
-#pragma warning restore CS0693 // Type parameter has the same name as the type parameter from outer type
-        => _mapper.Map<TEntity>(dto);
 }
