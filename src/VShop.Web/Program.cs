@@ -1,21 +1,29 @@
+using VShopWeb.Interfaces;
+using VShopWeb.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHttpClient("MicroserviceProduct", e => e.BaseAddress = new Uri(builder.Configuration["MicroserviceProduct:UrlApi"] ?? string.Empty));
+builder.Services.AddHttpClient("MicroserviceProduct", e => e.BaseAddress = new
+                                    Uri(builder.Configuration["MicroserviceProduct:UrlApi"] ?? string.Empty));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<IServiceCategory, ServiceCategory>();
+
+builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
