@@ -1,0 +1,68 @@
+﻿@model IEnumerable<VShopWeb.Models.ProductViewModel>
+
+<h2>Products</h2>
+<hr />
+
+<div class ="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <a asp-action="CreateProduct" class="btn btn-primary">
+                    <span title="Create New" class="fas fa-plus"></span> New Product
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(e => e.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(e => e.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(e => e.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(e => e.Price)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var product in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(e => product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(e => product.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(e => product.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(e => product.Price)
+                    </td>
+
+                    <td>
+                        <a asp-action="UpdateProduct" asp-route-id="@product.Id" title="Edit" class="btn btn-warning">
+                            <span class="fas fa-edit"></span>
+                        </a>
+                        <a asp-action="DeleteProduct" asp-route-id="@product.Id" title="Delete" class="btn btn-danger">
+                            <span class="fas fa-trash-alt"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
