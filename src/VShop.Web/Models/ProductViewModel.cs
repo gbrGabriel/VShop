@@ -36,10 +36,11 @@ public class ProductViewModel
         MinimumLength = 3,
         ErrorMessage = "The field must be between {1} and {0}"
     )]
+    [DisplayName("Image URL")]
     public string ImageUrl { get; set; } = null!;
 
-    [DisplayName("Category name")]
-    public string CategoryName { get; set; } = null!;
+    [DisplayName("Category Name")]
+    public string? CategoryName { get; set; } = null!;
 
     [Required(ErrorMessage = "The {0} is required")]
     [DisplayName("Category")]
