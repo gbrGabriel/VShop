@@ -6,5 +6,5 @@ public interface IServiceBase<TModel>
     Task<IEnumerable<TModel>?> GetAllAsync(string requestUri);
     Task<TModel?> PostAsync(string requestUri, TModel model);
     Task<TModel?> PutAsync(string requestUri, TModel model);
-    Task DeleteAsync(string requestUri);
+    Task<bool> DeleteAsync(string requestUri);
 }
