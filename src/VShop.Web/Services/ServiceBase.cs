@@ -71,7 +71,7 @@ public abstract class ServiceBase<TModel>(IHttpClientFactory httpClientFactory, 
     {
         try
         {
-            using var response = await _httpClientFactory.CreateClient().PutAsJsonAsync(requestUri, model);
+            using var response = await _httpClientFactory.CreateClient("MicroserviceProduct").PutAsJsonAsync(requestUri, model);
 
             if (response.IsSuccessStatusCode)
             {
@@ -85,11 +85,17 @@ public abstract class ServiceBase<TModel>(IHttpClientFactory httpClientFactory, 
         }
     }
 
-    public async Task DeleteAsync(string requestUri)
+    public async Task<bool> DeleteAsync(string requestUri)
     {
         try
         {
-            await _httpClientFactory.CreateClient("MicroserviceProduct").DeleteAsync(requestUri);
+            using var response = await _httpClientFactory.CreateClient("MicroserviceProduct").DeleteAsync(requestUri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<bool>(await response.Content.ReadAsStreamAsync(), _options);
+            }
+            return false;
         }
         catch (Exception)
         {
