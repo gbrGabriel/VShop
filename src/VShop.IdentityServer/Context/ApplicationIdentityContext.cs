@@ -6,8 +6,5 @@ namespace VShopIdentityServer.Context;
 
 public class ApplicationIdentityContext : IdentityDbContext<ApplicationUser>
 {
-    public ApplicationIdentityContext(DbContextOptions<ApplicationIdentityContext> options) : base(options)
-    {
-
-    }
+    public ApplicationIdentityContext(DbContextOptions<ApplicationIdentityContext> options) : base(options) { }
 }

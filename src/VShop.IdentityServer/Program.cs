@@ -1,22 +1,51 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using VShopIdentityServer.Configuration;
+using VShopIdentityServer.Context;
+using VShopIdentityServer.Identity;
+using VShopIdentityServer.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().
+                AddEntityFrameworkStores<ApplicationIdentityContext>().AddDefaultTokenProviders();
+
+builder.Services.AddDbContext<ApplicationIdentityContext>(e =>
+                e.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var builderIdentityServer = builder.Services.AddIdentityServer(opt =>
+{
+    opt.Events.RaiseErrorEvents = true;
+    opt.Events.RaiseInformationEvents = true;
+    opt.Events.RaiseFailureEvents = true;
+    opt.Events.RaiseSuccessEvents = true;
+    opt.EmitStaticAudienceClaim = true;
+}).AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources).
+        AddInMemoryApiScopes(IdentityConfiguration.ApiScopes).
+        AddInMemoryClients(IdentityConfiguration.Clients).
+        AddAspNetIdentity<ApplicationUser>();
+
+builderIdentityServer.AddDeveloperSigningCredential();
+
+builder.Services.AddScoped<IDatabaseIdentityInitialize, DatabaseIdentityServerInitializer>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection()
+    ;
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseIdentityServer();
 
 app.UseAuthorization();
 
