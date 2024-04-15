@@ -194,10 +194,10 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
     /// </summary>
     /// <param name="id">Id do produto cadastrado no sistema.</param>
     /// <returns>StatusCode 204</returns>
-    /// <response code="204">Retorna StatusCode 204.</response>
+    /// <response code="200">Retorna true ou false</response>
     /// <response code="404">Mensagem de não encontrado.</response>
     [HttpDelete("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteProduct(int id)
     {
@@ -208,9 +208,7 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
             if (product == null)
                 return NotFound($"No register for id.");
 
-            await _serviceProduct.DeleteAsync(product);
-
-            return NoContent();
+            return Ok(await _serviceProduct.DeleteAsync(product) > 0);
         }
         catch (Exception)
         {
