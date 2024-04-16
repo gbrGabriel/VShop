@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using VShopWeb.Interfaces;
 using VShopWeb.Models;
+using VShopWeb.Roles;
 
 namespace VShopWeb.Controllers;
 
@@ -60,6 +62,7 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> DeleteProduct(int id)
     {
         try
@@ -78,6 +81,7 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
     }
 
     [HttpPost, ActionName("DeleteProduct")]
+    [Authorize(Roles = Role.Admin)]
     public async Task<IActionResult> DeleteProductById(int id)
     {
         try
@@ -96,6 +100,7 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> UpdateProduct(ProductViewModel model)
     {
         try
@@ -116,6 +121,7 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateProduct(ProductViewModel model)
     {
         try

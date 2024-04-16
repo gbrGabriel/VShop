@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using VShopWeb.Interfaces;
 using VShopWeb.Services;
 
@@ -14,6 +15,26 @@ builder.Services.AddScoped<IServiceCategory, ServiceCategory>();
 
 builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
 
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultScheme = "Cookies";
+    opt.DefaultChallengeScheme = "oidc";
+}).AddCookie("Cookies", e => e.ExpireTimeSpan = TimeSpan.FromMinutes(10)).AddOpenIdConnect("oidc", opt =>
+{
+    opt.Authority = builder.Configuration["MicroserviceProduct:IdentityServer"] ?? string.Empty;
+    opt.GetClaimsFromUserInfoEndpoint = true;
+    opt.ClientId = "vshop";
+    opt.ClientSecret = builder.Configuration["Client:Secret"] ?? string.Empty;
+    opt.ResponseType = "code";
+    opt.ClaimActions.MapJsonKey("role", "role", "role");
+    opt.ClaimActions.MapJsonKey("sub", "sub", "sub");
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters.NameClaimType = "name";
+    opt.TokenValidationParameters.RoleClaimType = "role";
+    opt.Scope.Add("vshop");
+    opt.SaveTokens = true;
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -27,6 +48,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
