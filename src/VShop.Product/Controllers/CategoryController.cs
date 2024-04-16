@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VShopProduct.DTOs;
 using VShopProduct.Interfaces;
 using VShopProduct.Models;
+using VShopProduct.Roles;
 
 namespace VShopProduct.Controllers;
 
 [Route("api/v1/category")]
+[Authorize]
 public class CategoryController(IServiceCategory serviceCategory) : AbstractApiBaseController
 {
     private readonly IServiceCategory _serviceCategory = serviceCategory;
@@ -141,6 +144,7 @@ public class CategoryController(IServiceCategory serviceCategory) : AbstractApiB
     /// <response code="204">Retorna StatusCode 204.</response>
     /// <response code="404">Mensagem de não encontrado.</response>
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = Role.Admin)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteCategory(int id)

@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VShopProduct.DTOs;
 using VShopProduct.Interfaces;
 using VShopProduct.Models;
+using VShopProduct.Roles;
 
 namespace VShopProduct.Controllers;
 
 [Route("api/v1/product")]
+[Authorize]
 public class ProductController(IServiceProduct serviceProduct, IServiceCategory serviceCategory) : AbstractApiBaseController
 {
     private readonly IServiceProduct _serviceProduct = serviceProduct;
@@ -197,6 +200,7 @@ public class ProductController(IServiceProduct serviceProduct, IServiceCategory 
     /// <response code="200">Retorna true ou false</response>
     /// <response code="404">Mensagem de não encontrado.</response>
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = Role.Admin)]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteProduct(int id)

@@ -278,3 +278,4 @@ D:\Projetos\VShop\src\VShop.Product\obj\Debug\net8.0\VShop.Product.xml
 D:\Projetos\VShop\src\VShop.Product\obj\Debug\net8.0\VShop.Product.pdb
 D:\Projetos\VShop\src\VShop.Product\obj\Debug\net8.0\VShop.Product.genruntimeconfig.cache
 D:\Projetos\VShop\src\VShop.Product\obj\Debug\net8.0\ref\VShop.Product.dll
+C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.Product\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
