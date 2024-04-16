@@ -49,8 +49,21 @@ app.UseIdentityServer();
 
 app.UseAuthorization();
 
+DatabaseIdentityServer(app);
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void DatabaseIdentityServer(IApplicationBuilder builder)
+{
+    using (var scope = builder.ApplicationServices.CreateScope())
+    {
+        var initRoleUsers = scope.ServiceProvider.GetService<IDatabaseIdentityInitialize>();
+
+        initRoleUsers.InitializeRoles().Wait();
+        initRoleUsers.InitializeUser().Wait();
+    }
+}

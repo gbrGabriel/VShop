@@ -2,6 +2,6 @@
 
 public interface IDatabaseIdentityInitialize
 {
-    void InitializeRoles();
-    void InitializeUser();
+    Task InitializeRoles();
+    Task InitializeUser();
 }

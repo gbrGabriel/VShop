@@ -17,7 +17,7 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
         _userManager = userManager;
     }
 
-    public async void InitializeRoles()
+    public async Task InitializeRoles()
     {
         if (!await _roleManager.RoleExistsAsync(IdentityConfiguration.Admin))
         {
@@ -39,14 +39,14 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
 
     }
 
-    public async void InitializeUser()
+    public async Task InitializeUser()
     {
         if (await _userManager.FindByEmailAsync("admin1@com.br") == null)
         {
             var admin = new ApplicationUser
             {
                 UserName = "admin1",
-                NormalizedUserName = IdentityConfiguration.Admin,
+                NormalizedUserName = IdentityConfiguration.Admin.ToUpper(),
                 Email = "admin1@com.br",
                 NormalizedEmail = "admin1@com.br".ToUpper(),
                 EmailConfirmed = true,
@@ -57,7 +57,7 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            var result = await _userManager.CreateAsync(admin, "keysecretgenericone#2024!");
+            var result = await _userManager.CreateAsync(admin, "Keysecretgenericone#2024!");
 
             if (result.Succeeded)
             {
@@ -78,7 +78,7 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
             var client = new ApplicationUser
             {
                 UserName = "client1",
-                NormalizedUserName = IdentityConfiguration.Client,
+                NormalizedUserName = IdentityConfiguration.Client.ToUpper(),
                 Email = "client1@com.br",
                 NormalizedEmail = "client1@com.br".ToUpper(),
                 EmailConfirmed = true,
@@ -89,7 +89,7 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            var result = await _userManager.CreateAsync(client, "keysecretgenericone#2024!");
+            var result = await _userManager.CreateAsync(client, "Keysecretgenericone#2024!");
 
             if (result.Succeeded)
             {
