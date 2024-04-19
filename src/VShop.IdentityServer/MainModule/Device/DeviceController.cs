@@ -2,10 +2,6 @@
 // See LICENSE in the project root for license information.
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
@@ -14,31 +10,22 @@ using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace IdentityServerHost.Quickstart.UI
 {
     [Authorize]
     [SecurityHeaders]
-    public class DeviceController : Controller
+    public class DeviceController(
+        IDeviceFlowInteractionService interaction,
+        IEventService eventService,
+        IOptions<IdentityServerOptions> options,
+        ILogger<DeviceController> logger) : Controller
     {
-        private readonly IDeviceFlowInteractionService _interaction;
-        private readonly IEventService _events;
-        private readonly IOptions<IdentityServerOptions> _options;
-        private readonly ILogger<DeviceController> _logger;
-
-        public DeviceController(
-            IDeviceFlowInteractionService interaction,
-            IEventService eventService,
-            IOptions<IdentityServerOptions> options,
-            ILogger<DeviceController> logger)
-        {
-            _interaction = interaction;
-            _events = eventService;
-            _options = options;
-            _logger = logger;
-        }
+        private readonly IDeviceFlowInteractionService _interaction = interaction;
+        private readonly IEventService _events = eventService;
+        private readonly IOptions<IdentityServerOptions> _options = options;
+        private readonly ILogger<DeviceController> _logger = logger;
 
         [HttpGet]
         public async Task<IActionResult> Index()

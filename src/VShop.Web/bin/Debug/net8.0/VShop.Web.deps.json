@@ -8,36 +8,25 @@
     ".NETCoreApp,Version=v8.0": {
       "VShop.Web/1.0.0": {
         "dependencies": {
-          "AutoMapper": "12.0.1",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "AutoMapper": "13.0.1",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
-          "Microsoft.AspNetCore.Authentication.OpenIdConnect": "7.0.18",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.4",
+          "Microsoft.AspNetCore.Authentication.OpenIdConnect": "8.0.4",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "7.5.1",
           "System.IdentityModel.Tokens.Jwt": "7.5.1"
         },
         "runtime": {
           "VShop.Web.dll": {}
         }
       },
-      "AutoMapper/12.0.1": {
+      "AutoMapper/13.0.1": {
         "dependencies": {
-          "Microsoft.CSharp": "4.7.0"
-        },
-        "runtime": {
-          "lib/netstandard2.1/AutoMapper.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.1.0"
-          }
-        }
-      },
-      "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.1": {
-        "dependencies": {
-          "AutoMapper": "12.0.1",
           "Microsoft.Extensions.Options": "6.0.0"
         },
         "runtime": {
-          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.1.0"
+          "lib/net6.0/AutoMapper.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.0"
           }
         }
       },
@@ -66,14 +55,25 @@
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0"
         }
       },
-      "Microsoft.AspNetCore.Authentication.OpenIdConnect/7.0.18": {
+      "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.4": {
         "dependencies": {
-          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.35.0"
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "7.5.1"
         },
         "runtime": {
-          "lib/net7.0/Microsoft.AspNetCore.Authentication.OpenIdConnect.dll": {
-            "assemblyVersion": "7.0.18.0",
-            "fileVersion": "7.0.1824.16924"
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "8.0.4.0",
+            "fileVersion": "8.0.424.17014"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.OpenIdConnect/8.0.4": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "7.5.1"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.OpenIdConnect.dll": {
+            "assemblyVersion": "8.0.4.0",
+            "fileVersion": "8.0.424.17014"
           }
         }
       },
@@ -139,7 +139,6 @@
           "System.Text.Encodings.Web": "4.5.0"
         }
       },
-      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Extensions.Configuration.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "6.0.0"
@@ -209,27 +208,26 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Protocols/6.35.0": {
+      "Microsoft.IdentityModel.Protocols/7.5.1": {
         "dependencies": {
-          "Microsoft.IdentityModel.Logging": "7.5.1",
           "Microsoft.IdentityModel.Tokens": "7.5.1"
         },
         "runtime": {
-          "lib/net6.0/Microsoft.IdentityModel.Protocols.dll": {
-            "assemblyVersion": "6.35.0.0",
-            "fileVersion": "6.35.0.41201"
+          "lib/net8.0/Microsoft.IdentityModel.Protocols.dll": {
+            "assemblyVersion": "7.5.1.0",
+            "fileVersion": "7.5.1.50405"
           }
         }
       },
-      "Microsoft.IdentityModel.Protocols.OpenIdConnect/6.35.0": {
+      "Microsoft.IdentityModel.Protocols.OpenIdConnect/7.5.1": {
         "dependencies": {
-          "Microsoft.IdentityModel.Protocols": "6.35.0",
+          "Microsoft.IdentityModel.Protocols": "7.5.1",
           "System.IdentityModel.Tokens.Jwt": "7.5.1"
         },
         "runtime": {
-          "lib/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
-            "assemblyVersion": "6.35.0.0",
-            "fileVersion": "6.35.0.41201"
+          "lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
+            "assemblyVersion": "7.5.1.0",
+            "fileVersion": "7.5.1.50405"
           }
         }
       },
@@ -314,19 +312,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AutoMapper/12.0.1": {
+    "AutoMapper/13.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
-      "path": "automapper/12.0.1",
-      "hashPath": "automapper.12.0.1.nupkg.sha512"
-    },
-    "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-+g/K+Vpe3gGMKGzjslMOdqNlkikScDjWfVvmWTayrDHaG/n2pPmFBMa+jKX1r/h6BDGFdkyRjAuhFE3ykW+r1g==",
-      "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
-      "hashPath": "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512"
+      "sha512": "sha512-/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "path": "automapper/13.0.1",
+      "hashPath": "automapper.13.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication/2.2.0": {
       "type": "package",
@@ -349,12 +340,19 @@
       "path": "microsoft.aspnetcore.authentication.core/2.2.0",
       "hashPath": "microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Authentication.OpenIdConnect/7.0.18": {
+    "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aH8R5FnH0fjsfqwoTfMBJKIvl+dlT8Yo181TVL4CciKbqW83P3oV4W5WQWFlhomws2UfZEOUgm6GWrDgx8BE9Q==",
-      "path": "microsoft.aspnetcore.authentication.openidconnect/7.0.18",
-      "hashPath": "microsoft.aspnetcore.authentication.openidconnect.7.0.18.nupkg.sha512"
+      "sha512": "sha512-tHnHRBgQyiVNZJ8PksNinLdGOsE8+tFFv3E9QEtmwO+iyTHRvg4bJ4X0XZG1u9KxXMTJuAdeIWKWYr2rTLEHqQ==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/8.0.4",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.8.0.4.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.OpenIdConnect/8.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-REVWecEYp7b9xuZzRgq09QjeQTlpA478AEZYWsjc7aa8zu+/TrAGRQbZW2YT3VpsdNl/Fv592sKt0gAnt+0hEw==",
+      "path": "microsoft.aspnetcore.authentication.openidconnect/8.0.4",
+      "hashPath": "microsoft.aspnetcore.authentication.openidconnect.8.0.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/2.2.0": {
       "type": "package",
@@ -425,13 +423,6 @@
       "sha512": "sha512-9ErxAAKaDzxXASB/b5uLEkLgUWv1QbeVxyJYEHQwMaxXOeFFVkQxiq8RyfVcifLU7NR0QY0p3acqx4ZpYfhHDg==",
       "path": "microsoft.aspnetcore.webutilities/2.2.0",
       "hashPath": "microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512"
-    },
-    "Microsoft.CSharp/4.7.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
-      "path": "microsoft.csharp/4.7.0",
-      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Abstractions/2.2.0": {
       "type": "package",
@@ -517,19 +508,19 @@
       "path": "microsoft.identitymodel.logging/7.5.1",
       "hashPath": "microsoft.identitymodel.logging.7.5.1.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Protocols/6.35.0": {
+    "Microsoft.IdentityModel.Protocols/7.5.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BPQhlDzdFvv1PzaUxNSk+VEPwezlDEVADIKmyxubw7IiELK18uJ06RQ9QKKkds30XI+gDu9n8j24XQ8w7fjWcg==",
-      "path": "microsoft.identitymodel.protocols/6.35.0",
-      "hashPath": "microsoft.identitymodel.protocols.6.35.0.nupkg.sha512"
+      "sha512": "sha512-hXQLOHc1AwOxmb6fv1cOLWUCvO2MectjEN0Lw/0muJwy7HbMmdEQ69dpmMMbxPKNWpXVnkeZ9qyTSoBhm8sYCA==",
+      "path": "microsoft.identitymodel.protocols/7.5.1",
+      "hashPath": "microsoft.identitymodel.protocols.7.5.1.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Protocols.OpenIdConnect/6.35.0": {
+    "Microsoft.IdentityModel.Protocols.OpenIdConnect/7.5.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LMtVqnECCCdSmyFoCOxIE5tXQqkOLrvGrL7OxHg41DIm1bpWtaCdGyVcTAfOQpJXvzND9zUKIN/lhngPkYR8vg==",
-      "path": "microsoft.identitymodel.protocols.openidconnect/6.35.0",
-      "hashPath": "microsoft.identitymodel.protocols.openidconnect.6.35.0.nupkg.sha512"
+      "sha512": "sha512-3/wKvCugi1cgk/Sv/5rWWYDKPEMW4DHlE3wUzPELboeGyqFeUYxvK5o9JpUtBTGVpUTlU3VpkURrCNJOD/Ijrw==",
+      "path": "microsoft.identitymodel.protocols.openidconnect/7.5.1",
+      "hashPath": "microsoft.identitymodel.protocols.openidconnect.7.5.1.nupkg.sha512"
     },
     "Microsoft.IdentityModel.Tokens/7.5.1": {
       "type": "package",

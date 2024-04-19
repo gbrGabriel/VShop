@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabriel.silva\\RepositorioGabrielSilva\\VShop\\src\\VShop.Product\\VShop.Product.csproj": {}
+    "D:\\Gabriel\\Downloads\\VShop\\src\\VShop.Product\\VShop.Product.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabriel.silva\\RepositorioGabrielSilva\\VShop\\src\\VShop.Product\\VShop.Product.csproj": {
+    "D:\\Gabriel\\Downloads\\VShop\\src\\VShop.Product\\VShop.Product.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabriel.silva\\RepositorioGabrielSilva\\VShop\\src\\VShop.Product\\VShop.Product.csproj",
+        "projectUniqueName": "D:\\Gabriel\\Downloads\\VShop\\src\\VShop.Product\\VShop.Product.csproj",
         "projectName": "VShop.Product",
-        "projectPath": "C:\\Users\\gabriel.silva\\RepositorioGabrielSilva\\VShop\\src\\VShop.Product\\VShop.Product.csproj",
-        "packagesPath": "C:\\Users\\gabriel.silva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabriel.silva\\RepositorioGabrielSilva\\VShop\\src\\VShop.Product\\obj\\",
+        "projectPath": "D:\\Gabriel\\Downloads\\VShop\\src\\VShop.Product\\VShop.Product.csproj",
+        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
+        "outputPath": "D:\\Gabriel\\Downloads\\VShop\\src\\VShop.Product\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gabriel.silva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -37,6 +38,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -45,35 +51,31 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.1, )"
+              "version": "[13.0.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -103,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

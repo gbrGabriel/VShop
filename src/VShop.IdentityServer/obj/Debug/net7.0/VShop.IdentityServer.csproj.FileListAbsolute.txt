@@ -89,6 +89,7 @@ D:\Projetos\VShop\src\VShop.IdentityServer\obj\Debug\net7.0\VShop.IdentityServer
 D:\Projetos\VShop\src\VShop.IdentityServer\obj\Debug\net7.0\VShop.Id.FF197534.Up2Date
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.IdentityServer\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.IdentityServer\bin\Debug\net7.0\appsettings.json
+C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.IdentityServer\bin\Debug\net7.0\keys\is-signing-key-5AAAE49FEDE627692CEB1779149F265B.json
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.IdentityServer\bin\Debug\net7.0\VShop.IdentityServer.staticwebassets.runtime.json
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.IdentityServer\bin\Debug\net7.0\VShop.IdentityServer.exe
 C:\Users\gabriel.silva\RepositorioGabrielSilva\VShop\src\VShop.IdentityServer\bin\Debug\net7.0\VShop.IdentityServer.deps.json

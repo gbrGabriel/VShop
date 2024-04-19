@@ -2,15 +2,12 @@
 // See LICENSE in the project root for license information.
 
 
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -19,23 +16,15 @@ namespace IdentityServerHost.Quickstart.UI
     /// </summary>
     [SecurityHeaders]
     [Authorize]
-    public class GrantsController : Controller
+    public class GrantsController(IIdentityServerInteractionService interaction,
+        IClientStore clients,
+        IResourceStore resources,
+        IEventService events) : Controller
     {
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly IClientStore _clients;
-        private readonly IResourceStore _resources;
-        private readonly IEventService _events;
-
-        public GrantsController(IIdentityServerInteractionService interaction,
-            IClientStore clients,
-            IResourceStore resources,
-            IEventService events)
-        {
-            _interaction = interaction;
-            _clients = clients;
-            _resources = resources;
-            _events = events;
-        }
+        private readonly IIdentityServerInteractionService _interaction = interaction;
+        private readonly IClientStore _clients = clients;
+        private readonly IResourceStore _resources = resources;
+        private readonly IEventService _events = events;
 
         /// <summary>
         /// Show list of grants
@@ -64,7 +53,7 @@ namespace IdentityServerHost.Quickstart.UI
             var grants = await _interaction.GetAllUserGrantsAsync();
 
             var list = new List<GrantViewModel>();
-            foreach(var grant in grants)
+            foreach (var grant in grants)
             {
                 var client = await _clients.FindClientByIdAsync(grant.ClientId);
                 if (client != null)

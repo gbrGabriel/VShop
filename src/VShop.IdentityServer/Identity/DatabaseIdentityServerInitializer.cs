@@ -1,21 +1,14 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 using VShopIdentityServer.Configuration;
 using VShopIdentityServer.Interfaces;
 
 namespace VShopIdentityServer.Identity;
 
-public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
+public class DatabaseIdentityServerInitializer(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) : IDatabaseIdentityInitialize
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
-
-    public DatabaseIdentityServerInitializer(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
-    {
-        _roleManager = roleManager;
-        _userManager = userManager;
-    }
+    private readonly UserManager<ApplicationUser> _userManager = userManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
     public async Task InitializeRoles()
     {
@@ -63,13 +56,13 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
             {
                 await _userManager.AddToRoleAsync(admin, IdentityConfiguration.Admin);
 
-                await _userManager.AddClaimsAsync(admin, new Claim[]
-               {
+                await _userManager.AddClaimsAsync(admin,
+               [
                     new(JwtClaimTypes.Name, $"{admin.FirstName} {admin.LastName}"),
                     new(JwtClaimTypes.GivenName, admin.FirstName),
-                    new (JwtClaimTypes.FamilyName, admin.LastName),
-                    new (JwtClaimTypes.Role, IdentityConfiguration.Admin)
-               });
+                    new(JwtClaimTypes.FamilyName, admin.LastName),
+                    new(JwtClaimTypes.Role, IdentityConfiguration.Admin)
+               ]);
             }
         }
 
@@ -95,13 +88,13 @@ public class DatabaseIdentityServerInitializer : IDatabaseIdentityInitialize
             {
                 await _userManager.AddToRoleAsync(client, IdentityConfiguration.Client);
 
-                await _userManager.AddClaimsAsync(client, new Claim[]
-               {
+                await _userManager.AddClaimsAsync(client,
+               [
                     new(JwtClaimTypes.Name, $"{client.FirstName} {client.LastName}"),
                     new(JwtClaimTypes.GivenName, client.FirstName),
-                    new (JwtClaimTypes.FamilyName, client.LastName),
-                    new (JwtClaimTypes.Role, IdentityConfiguration.Admin)
-               });
+                    new(JwtClaimTypes.FamilyName, client.LastName),
+                    new(JwtClaimTypes.Role, IdentityConfiguration.Admin)
+               ]);
             }
         }
     }

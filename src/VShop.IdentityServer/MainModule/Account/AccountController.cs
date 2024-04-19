@@ -8,11 +8,12 @@ using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
-using Duende.IdentityServer.Test;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using VShopIdentityServer.Identity;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -23,32 +24,24 @@ namespace IdentityServerHost.Quickstart.UI
     /// </summary>
     [SecurityHeaders]
     [AllowAnonymous]
-    public class AccountController : Controller
+    public class AccountController(
+        IIdentityServerInteractionService interaction,
+        IClientStore clientStore,
+        IAuthenticationSchemeProvider schemeProvider,
+        IIdentityProviderStore identityProviderStore,
+        IEventService events,
+        UserManager<ApplicationUser> userManager,
+        SignInManager<ApplicationUser> signInManager,
+        RoleManager<IdentityRole> roleManager) : Controller
     {
-        private readonly TestUserStore _users;
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly IClientStore _clientStore;
-        private readonly IAuthenticationSchemeProvider _schemeProvider;
-        private readonly IIdentityProviderStore _identityProviderStore;
-        private readonly IEventService _events;
-
-        public AccountController(
-            IIdentityServerInteractionService interaction,
-            IClientStore clientStore,
-            IAuthenticationSchemeProvider schemeProvider,
-            IIdentityProviderStore identityProviderStore,
-            IEventService events,
-            TestUserStore users = null)
-        {
-            // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-            _users = users ?? throw new Exception("Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
-
-            _interaction = interaction;
-            _clientStore = clientStore;
-            _schemeProvider = schemeProvider;
-            _identityProviderStore = identityProviderStore;
-            _events = events;
-        }
+        private readonly UserManager<ApplicationUser> _userManager = userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager = roleManager;
+        private readonly IIdentityServerInteractionService _interaction = interaction;
+        private readonly IClientStore _clientStore = clientStore;
+        private readonly IAuthenticationSchemeProvider _schemeProvider = schemeProvider;
+        private readonly IIdentityProviderStore _identityProviderStore = identityProviderStore;
+        private readonly IEventService _events = events;
 
         /// <summary>
         /// Entry point into the login workflow
@@ -108,10 +101,15 @@ namespace IdentityServerHost.Quickstart.UI
             if (ModelState.IsValid)
             {
                 // validate username/password against in-memory store
-                if (_users.ValidateCredentials(model.Username, model.Password))
+                //if (_users.ValidateCredentials(model.Username, model.Password))
+                //{
+
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberLogin, false);
+
+                if (result.Succeeded)
                 {
-                    var user = _users.FindByUsername(model.Username);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username, clientId: context?.Client.ClientId));
+                    var user = await _userManager.FindByNameAsync(model.Username);
+                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
 
                     // only set explicit expiration here if user chooses "remember me". 
                     // otherwise we rely upon expiration configured in cookie middleware.
@@ -126,9 +124,9 @@ namespace IdentityServerHost.Quickstart.UI
                     };
 
                     // issue authentication cookie with subject ID and username
-                    var isuser = new IdentityServerUser(user.SubjectId)
+                    var isuser = new IdentityServerUser(user.Id)
                     {
-                        DisplayName = user.Username
+                        DisplayName = user.UserName
                     };
 
                     await HttpContext.SignInAsync(isuser, props);
@@ -206,7 +204,7 @@ namespace IdentityServerHost.Quickstart.UI
             if (User?.Identity.IsAuthenticated == true)
             {
                 // delete local authentication cookie
-                await HttpContext.SignOutAsync();
+                await _signInManager.SignOutAsync();
 
                 // raise the logout event
                 await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
@@ -339,7 +337,6 @@ namespace IdentityServerHost.Quickstart.UI
         [Obsolete]
         private async Task<LoggedOutViewModel> BuildLoggedOutViewModelAsync(string logoutId)
         {
-            // get context information (client name, post logout redirect URI and iframe for federated signout)
             var logout = await _interaction.GetLogoutContextAsync(logoutId);
 
             var vm = new LoggedOutViewModel
@@ -356,14 +353,12 @@ namespace IdentityServerHost.Quickstart.UI
                 var idp = User.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
                 if (idp != null && idp != Duende.IdentityServer.IdentityServerConstants.LocalIdentityProvider)
                 {
-                    var providerSupportsSignout = await HttpContext.GetSchemeSupportsSignOutAsync(idp);
-                    if (providerSupportsSignout)
+                    var scheme = await _schemeProvider.GetSchemeAsync(idp);
+                    if (scheme != null && scheme.HandlerType != null &&
+                        typeof(IAuthenticationSignOutHandler).IsAssignableFrom(scheme.HandlerType))
                     {
                         if (vm.LogoutId == null)
                         {
-                            // if there's no current logout context, we need to create one
-                            // this captures necessary info from the current logged in user
-                            // before we signout and redirect away to the external IdP for signout
                             vm.LogoutId = await _interaction.CreateLogoutContextAsync();
                         }
 

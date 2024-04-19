@@ -21,14 +21,13 @@ builder.Services.AddAuthentication(opt =>
     opt.DefaultChallengeScheme = "oidc";
 }).AddCookie("Cookies", e => e.ExpireTimeSpan = TimeSpan.FromMinutes(10)).AddOpenIdConnect("oidc", opt =>
 {
-    opt.Authority = builder.Configuration["MicroserviceProduct:IdentityServer"] ?? string.Empty;
+    opt.Authority = builder.Configuration["MicroserviceProduct:IdentityServer"];
     opt.GetClaimsFromUserInfoEndpoint = true;
     opt.ClientId = "vshop";
-    opt.ClientSecret = builder.Configuration["Client:Secret"] ?? string.Empty;
+    opt.ClientSecret = builder.Configuration["Client:Secret"];
     opt.ResponseType = "code";
     opt.ClaimActions.MapJsonKey("role", "role", "role");
     opt.ClaimActions.MapJsonKey("sub", "sub", "sub");
-    opt.RequireHttpsMetadata = false;
     opt.TokenValidationParameters.NameClaimType = "name";
     opt.TokenValidationParameters.RoleClaimType = "role";
     opt.Scope.Add("vshop");

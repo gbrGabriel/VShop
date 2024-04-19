@@ -19,7 +19,7 @@ public static class DependencyInjectionModule
 
         services.AddAuthentication("Bearer").AddJwtBearer("Bearer", opt =>
         {
-            opt.Authority = configuration["VShop.IdentityServer:ApplicationUrl"] ?? string.Empty;
+            opt.Authority = configuration["IdentityServer:ApplicationUrl"];
             opt.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = false

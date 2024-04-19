@@ -2,19 +2,14 @@
 // See LICENSE in the project root for license information.
 
 
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
 using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -23,21 +18,14 @@ namespace IdentityServerHost.Quickstart.UI
     /// </summary>
     [SecurityHeaders]
     [Authorize]
-    public class ConsentController : Controller
+    public class ConsentController(
+        IIdentityServerInteractionService interaction,
+        IEventService events,
+        ILogger<ConsentController> logger) : Controller
     {
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly IEventService _events;
-        private readonly ILogger<ConsentController> _logger;
-
-        public ConsentController(
-            IIdentityServerInteractionService interaction,
-            IEventService events,
-            ILogger<ConsentController> logger)
-        {
-            _interaction = interaction;
-            _events = events;
-            _logger = logger;
-        }
+        private readonly IIdentityServerInteractionService _interaction = interaction;
+        private readonly IEventService _events = events;
+        private readonly ILogger<ConsentController> _logger = logger;
 
         /// <summary>
         /// Shows the consent screen
@@ -210,7 +198,7 @@ namespace IdentityServerHost.Quickstart.UI
                 {
                     var scopeVm = CreateScopeViewModel(parsedScope, apiScope, vm.ScopesConsented.Contains(parsedScope.RawValue) || model == null);
                     scopeVm.Resources = apiResources.Where(x => x.Scopes.Contains(parsedScope.ParsedName))
-                        .Select(x=> new ResourceViewModel
+                        .Select(x => new ResourceViewModel
                         {
                             Name = x.Name,
                             DisplayName = x.DisplayName ?? x.Name,
